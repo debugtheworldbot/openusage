@@ -23,4 +23,8 @@ tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tauri-nspanel = { git = "https://github.com/ahkohd/tauri-nspanel", branch = "v2.1" }
+dirs = "6"
+log = "0.4"
+reqwest = { version = "0.12", features = ["blocking"] }
+rquickjs = { version = "0.10", features = ["bindgen"] }
 
