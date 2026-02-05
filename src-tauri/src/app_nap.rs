@@ -19,7 +19,10 @@ pub fn disable_app_nap() {
     INIT.call_once(|| {
         unsafe {
             let process_info = NSProcessInfo::processInfo();
-            let options: u64 = 0xFF; // NSActivityBackground
+            // NSActivityUserInitiatedAllowingIdleSystemSleep (0x00EFFFFF)
+            // Prevents App Nap but still allows the system to sleep per user preferences.
+            // NSActivityBackground (0xFF) does NOT prevent App Nap.
+            let options: u64 = 0x00FFFFFF & !(1u64 << 20);
             let reason = NSString::from_str("Periodic usage data refresh");
             let token: Retained<NSObject> = msg_send![
                 &process_info,
